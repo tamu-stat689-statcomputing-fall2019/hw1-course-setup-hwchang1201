@@ -71,7 +71,7 @@ calculateMSE <- function(beta, beta_LS){
     stop("beta and beta_LS have the different dimensions.")
   }
   
-  MSE <- sum((beta-beta_LS)^2)/length(beta)
+  MSE <- as.numeric(crossprod(beta-beta_LS))
   
   # Return MSE - error ||beta - beta_LS||_2^2
   return(MSE)
