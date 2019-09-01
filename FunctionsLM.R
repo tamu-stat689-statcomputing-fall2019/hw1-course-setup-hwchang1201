@@ -64,4 +64,17 @@ calculateBeta <- function(X, Y){
 
 # Calculate MSE
 calculateMSE <- function(beta, beta_LS){
+  
+  
+  #(exception) beta and beta_LS have the same dimensions.
+  if (length(beta)!=length(beta_LS)) {
+    stop("beta and beta_LS have the different dimensions.")
+  }
+  
+  MSE <- sum((beta-beta_LS)^2)/length(beta)
+  
+  # Return MSE - error ||beta - beta_LS||_2^2
+  return(MSE)
+  
+  
 }
