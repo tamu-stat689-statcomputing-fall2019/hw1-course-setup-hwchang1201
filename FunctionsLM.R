@@ -32,6 +32,34 @@ generateY <- function(X, beta, sigma, seed = 5832652){
 # X - design matrix
 # Y -response
 calculateBeta <- function(X, Y){
+  
+  #(exception) X should be 2-dimensional.
+  
+  if(length(dim(X))>2) {
+    stop("X is more than 2-dimensional") 
+  }else if(length(dim(X))>2) {
+    stop("X is less than 2-dimensional")
+  }
+  
+  #(exception) t(X) and Y have to be compatible for matrix multiplication.
+  
+  if (dim(X)[1]!=length(Y)){
+    stop("t(X) and Y are not compatible for matrix multiplication")
+  }
+  
+  #(t(X)%*%X is not invertible)
+  if(rankMatrix(X) < min(dim(X))) {
+    stop("implementing later")
+  }
+  #(t(X)%*%X is invertible)
+  beta_LS <- solve(t(X)%*%X)%*%t(X)%*%Y
+  
+  # Calculate beta_LS
+  
+  
+  # Return beta
+  return(beta_LS)
+  
 }
 
 # Calculate MSE
