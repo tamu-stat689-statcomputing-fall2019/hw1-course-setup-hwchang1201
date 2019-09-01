@@ -46,14 +46,10 @@ calculateBeta <- function(X, Y){
   if (dim(X)[1]!=length(Y)){
     stop("t(X) and Y are not compatible for matrix multiplication")
   }
-  
-  #(t(X)%*%X is not invertible)
-  if(rankMatrix(X) < min(dim(X))) {
-    stop("implementing later")
-  }
+
   #(t(X)%*%X is invertible)
-  beta_LS <- solve(t(X)%*%X)%*%t(X)%*%Y
-  
+  beta_LS <-solve(crossprod(X,X),crossprod(X,Y))
+
   # Calculate beta_LS
   
   
