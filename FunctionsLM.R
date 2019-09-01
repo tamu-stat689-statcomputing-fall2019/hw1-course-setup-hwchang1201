@@ -4,8 +4,26 @@
 # sigma - standard deviation of the noise
 # seed  - starting seed value
 generateY <- function(X, beta, sigma, seed = 5832652){
-  #[ToDo] Set seed and generate Y following linear model
   
+  #(exception) X should be 2-dimensional.
+  
+  if(length(dim(X))>2) {
+    stop("X is more than 2-dimensional") 
+  }else if(length(dim(X))>2) {
+    stop("X is less than 2-dimensional")
+  }
+  
+  #(exception) X and beta has to be compatible for matrix multiplication.
+  
+  if(dim(X)[2]!=length(beta)) {
+    stop("the dimensions of X and beta are not compatible for matrix multiplication.") 
+  }
+  
+  #[ToDo] Set seed and generate Y following linear model
+  set.seed(seed)
+  epsilon <- sigma*rnorm(dim(X)[1])
+  Y <- X%*%beta + epsilon
+
   # Return Y
   return(Y)
 }
@@ -14,15 +32,8 @@ generateY <- function(X, beta, sigma, seed = 5832652){
 # X - design matrix
 # Y -response
 calculateBeta <- function(X, Y){
-  # Calculate beta_LS
-  
-  # Return beta
-  return(beta_LS)
 }
 
 # Calculate MSE
 calculateMSE <- function(beta, beta_LS){
-  
-  # Return MSE - error ||beta - beta_LS||_2^2
-  return(MSE)
 }
